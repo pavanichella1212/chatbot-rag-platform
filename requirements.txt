@@ -1,3 +1,2 @@
-fastapi>=0.115,<0.116
-uvicorn[standard]>=0.34,<0.35
-python-dotenv>=1.0,<2.0
+# No external runtime dependencies yet — this is plain Python for now.
+# Real packages (e.g. for the RAG pipeline) will be added here later.

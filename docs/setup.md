@@ -27,8 +27,8 @@ source .venv/bin/activate        # Windows: .venv\Scripts\activate
 pip install -r requirements-dev.txt
 ```
 
-This installs runtime dependencies (FastAPI, Uvicorn) plus dev tools (pytest, ruff, httpx).
-If you only need to run the app (no testing/linting), `pip install -r requirements.txt` is enough.
+This installs dev tools (pytest, ruff). There are no runtime dependencies yet —
+`src/main.py` is plain Python with nothing to install to run it.
 
 ## 4. Configure environment variables
 
@@ -36,18 +36,19 @@ If you only need to run the app (no testing/linting), `pip install -r requiremen
 cp config/example.env .env
 ```
 
-The defaults work out of the box for local development — no values need to be filled in yet.
+Nothing reads this yet — it's a placeholder for settings future features will need.
 
 ## 5. Run the app
 
 ```bash
-uvicorn src.main:app --reload
+python3 src/main.py
 ```
 
-Visit http://localhost:8000/health — you should see:
+You should see:
 
-```json
-{"status": "ok"}
+```
+Chatbot RAG Platform is running
+status: ok
 ```
 
 ## 6. Run lint and tests
@@ -62,5 +63,4 @@ Both should pass with no errors. This is exactly what CI runs on every pull requ
 ## Troubleshooting
 
 - **`command not found: python3`** — install Python 3.11+ from [python.org](https://www.python.org/downloads/).
-- **Port 8000 already in use** — run `uvicorn src.main:app --reload --port 8001` instead.
 - **Import errors when running pytest** — make sure your virtual environment is activated and you ran `pip install -r requirements-dev.txt` from the project root.
