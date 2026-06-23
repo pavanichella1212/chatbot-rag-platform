@@ -1,28 +1,49 @@
-name: CI
+name: CI   # Name of the workflow shown in GitHub Actions
 
 on:
   pull_request:
-    branches: [main]
+    branches: [main]   # Run CI when someone creates a PR to main
+
   push:
-    branches: [main]
+    branches: [main]   # Run CI when code is pushed to main
 
 jobs:
-  lint-and-test:
+  lint-and-test:       # Name of the job
+
     runs-on: ubuntu-latest
+    # GitHub creates a temporary Linux machine
+
     steps:
+
       - uses: actions/checkout@v4
+        # Download my repository code onto the machine
 
       - name: Set up Python
+
         uses: actions/setup-python@v5
+        # Install Python
+
         with:
           python-version: "3.12"
+          # Install Python version 3.12
+
           cache: "pip"
+          # Cache downloaded packages so future runs are faster
 
       - name: Install dependencies
+
         run: pip install -r requirements-dev.txt
+        # Install packages listed in requirements-dev.txt
+        # Example: pytest, ruff, fastapi
 
       - name: Lint with ruff
+
         run: ruff check .
+        # Check code quality and formatting
+        # Fails if code has style issues
 
       - name: Run tests
+
         run: pytest
+        # Run all tests inside tests/
+        # Fails if any test fails
